@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% block content%}
+	<div class="bgded overlay" style="background-image:url('../images/demo/backgrounds/a.jpg');"> 
+		<div align="center"><b><h1><font color="white">DashBoard</font></h1></b></div><hr/>
+		<div align="center">
+			<div class="btn-group-vertical" width="500px" height="500px">
+			<a id="myBtn" class="btn btn-outline-info" href="#">Send E-mail</a><br/><br/>
+			<a class="btn btn-outline-info" href="{{ url_for('advert')}}">Post Advert</a><br/><br/>
+			<a class="btn btn-outline-info" href="{{ url_for('home_blog') }}">Visit Blog site</a><br/><br/>
+			<a class="btn btn-outline-info" href="{{ url_for('search_market')}}">View available Customers</a><br/><br/>
+			<a class="btn btn-outline-info " href="{{ url_for('complaint')}}">Write Complaint</a><br/><br/>
+			<a class="btn btn-outline-info " href="{{ url_for('charts')}}">View Market statistics</a><br/><br/>
+			<a class="btn btn-outline-info" href="{{ url_for('status')}}">View Status of Complaints</a><br/><br/>
+			<a class="btn btn-outline-info" href="{{ url_for('crops')}}">Enter details about your Products</a><br/><hr/>
+		</div>
+		</div>
+	</div>
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+
+	  <!-- Modal content -->
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <span class="close">&times;</span>
+		  <font color="black"><h2>Send Message</h2></font>
+		</div>
+		<font color="black" >
+			<div class="content-section">
+				<form method="POST" action="">
+					{{ form.hidden_tag() }}
+					<fieldset class="form-group">
+						<legend class="border-bottom mb 4"><b>Register</b></legend>
+						<div class="form-group">
+							{{ form.sender.label(class="form-control-label") }}
+							
+							{% if form.sender.errors %}
+								{{ form.sender(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.sender.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.sender(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{{ form.receiver.label(class="form-control-label") }}
+							
+							{% if form.receiver.errors %}
+								{{ form.receiver(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.receiver.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.receiver(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{{ form.subject.label(class="form-control-label") }}
+							
+							{% if form.subject.errors %}
+								{{ form.subject(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.subject.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.subject(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{{ form.message.label(class="form-control-label") }}
+							
+							{% if form.message.errors %}
+								{{ form.message(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.message.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.message(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{{ form.submit(class="btn btn-outline-info") }}
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</font>
+	  </div>
+
+	</div>
+	<script>
+		// Get the modal
+		var modal = document.getElementById('myModal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks the button, open the modal 
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+
+{% endblock content%}

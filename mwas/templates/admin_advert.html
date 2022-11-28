@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content%}
+	<div class="bgded overlay" style="background-image:url('../images/demo/backgrounds/a.jpg');"> 
+		<div style='overflow-y:scroll;height:500px;'>
+			<table>
+				<tr>
+					<th>User names</th>
+					<th>Contact</th>
+					<th>Email</th>
+					<th> Advert Description</th>
+					<th>Date Posted</th>
+					<th>Picture</th>
+				</tr>
+				{% for advert in data%}
+					<tr>
+						<td>{{advert.username}}</td>
+						<td><a href="http://127.0.0.1:5000/markets/">{{advert.contact}}</a></td>
+						<td><a href="http://127.0.0.1:5000/email">{{advert.email}}</a></td>
+						<td>{{advert.Description}}</td>
+						<td>{{advert.date}}</td>
+						<td><img class="img-thumbnail" src="{{ url_for('static', filename='profile_pics/' + advert.image_file)}}"></td>
+					</tr>
+				{% endfor%}
+			</table>
+		</div>	
+		<h3><a href="{{ url_for('admin.index')}}">Back To Home</a></h3>
+	</div>
+{% endblock content%}

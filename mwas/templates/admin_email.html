@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content%}
+	<h3><font color="white">Send Message To User</font></h3>
+	<form method="POST" action="">
+					{{ form.hidden_tag() }}
+					<fieldset class="form-group">
+						<legend class="border-bottom mb 4"><b>Register</b></legend>
+						<div class="form-group">
+							{{ form.sender.label(class="form-control-label") }}
+							
+							{% if form.sender.errors %}
+								{{ form.sender(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.sender.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.sender(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{{ form.receiver.label(class="form-control-label") }}
+							
+							{% if form.receiver.errors %}
+								{{ form.receiver(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.receiver.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.receiver(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{{ form.subject.label(class="form-control-label") }}
+							
+							{% if form.subject.errors %}
+								{{ form.subject(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.subject.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.subject(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{{ form.message.label(class="form-control-label") }}
+							
+							{% if form.message.errors %}
+								{{ form.message(class="form-control form-control-lg is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.message.errors %}
+										<span>{{error}}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.message(class="form-control form-control-lg") }}
+							{% endif %}
+						</div>
+						<div class="form-group">
+							{{ form.submit(class="btn btn-outline-info") }}
+						</div>
+					</fieldset>
+					<h3><a href="{{ url_for('admin.index')}}">Back To Home</a></h3>
+					<hr/>
+	</form>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content%}
+	<h3><font color="white">The table below shows the availble Farmers that deal in {{query}}.</font></h3>
+	<div class="bgded overlay" style="overflow-x:auto;background-image:url('../images/demo/backgrounds/a.jpg');"> 
+		<table>
+			<tr>
+				<th>Farmer Names</th>
+				<th>Contact</th>
+				<th>Email</th>
+				<th>Physical Address</th>
+				<th>Image</th>
+			</tr>
+			{% for item in data%}
+				<tr>
+					<td>{{item.first_name}} {{item.last_name}}</td>
+					<td>{{item.phone_number}}</td>
+					<td>{{item.email}}</td>
+					<td>{{item.physical_address}}</td>
+					<td><img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + item.image_file) }}"></td>
+				</tr>
+			{% endfor%}
+		</table>
+		<h3><a href="{{ url_for('customer')}}">Back To DashBoard</a></h3>
+	</div>
+{% endblock content%}

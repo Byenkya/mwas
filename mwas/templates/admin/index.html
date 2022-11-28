@@ -1,0 +1,26 @@
+{%extends 'admin/master.html' %}
+{% block head_css %}
+{{ super() }}
+<link href="{{ url_for('static', filename='admini.css' )}}" rel="stylesheet">
+{% endblock head_css %}
+{% block body %}
+	<hr/>
+	<hr/>
+	<h1 style="font-family: 'Times New Roman', Times, serif;">Market statistics</h1>
+		<table align="center">
+				<tr>
+					<th>Weekly Agricultural reports</th>
+					<th>Food Prices</th>
+				</tr>
+				<tr>
+					<td>
+						<object type="text/html" data="http://www.infotradeuganda.com/index.php/products/weekly-reports.html" width="500px" height="500px" style="overflow:auto;border:1px ridge #ccc">
+						</object>
+					</td>
+					<td>
+						<object type="text/html" data="http://www.infotradeuganda.com/index.php/market-information/food-prices.html" width="500px" height="500px" style="overflow:auto;border:1px ridge #ccc">
+						</object>
+					</td>
+				</tr>
+		</table>
+{% endblock body%}

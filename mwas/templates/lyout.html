@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{{url_for('static', filename ='css/bootstrap.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename ='main.css')}}">
+		<script src="{{url_for('static', filename ='jquery/jquery.min.js')}}"></script>
+		<style>
+			body {
+				  margin: 0;
+				  font-family: Arial, Helvetica, sans-serif;
+				}
+
+				.topnav {
+				  overflow: hidden;
+				  background-color: #333;
+				}
+
+				.topnav a {
+				  float: left;
+				  color: #f2f2f2;
+				  text-align: center;
+				  padding: 14px 16px;
+				  text-decoration: none;
+				  font-size: 17px;
+				}
+				.topnav a:hover {
+				  background-color: #ddd;
+				  color: black;
+				}
+
+				.topnav a.active {
+				  background-color: #1f660f;
+				  color: white;
+				}
+		</style>
+		{%if title%}
+			<title>Flask Blog - {{title}}</title>
+		{% else%}
+			<title>MWAS blog</title>
+		{%endif%}
+	</head>
+	<body>
+		<div class="topnav row">
+			<div class="col-md-9">
+				<a class="active" href="#home">MWAS bolg</a>
+				<a href="{{ url_for('home_blog')}}">Home</a>
+			</div>
+			{% if current_user.is_authenticated %}
+				<div id="123" class="col-md-3">
+					<a href="{{ url_for('new_post') }}">New Post</a>
+					<a href="{{ url_for('account_blog')}}">Account</a>
+				</div>
+			{% else %}
+				<a href="{{ url_for('login')}}">Login</a>
+				<a href="#">Register</a>
+			{% endif %}
+		</div>
+		<br/>
+		<main role="main" class="container">
+			<div class="row">
+				<div class="col-md-8">
+					{% with messages = get_flashed_messages(with_categories=true)%}
+						{% if messages %}
+							{% for category,message in messages%}
+								<div class="alert alert-{{ category}}">
+									{{ message }}
+								</div>
+							{% endfor%}
+						{% endif %}
+					{% endwith %}
+					{% block content %}{% endblock %}
+				</div>
+				<div class="col-md-4">
+					<div class="content-section">
+						<h3>Information about the Blog</h3>
+						<p class="text-muted">You can put any information about Agriculture here you'd like
+							<ul>
+								<li>Latest Posts</li>
+								<li>Annoucements</li>
+								<li>Information about Agriculture</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+			</div>
+			{% if current_user.sign_in_as == "Farmer" %}
+				<h3><a href="{{ url_for('farm')}}">Back To DashBoard</a></h3>
+			{% else %}
+				<h3><a href="{{ url_for('customer')}}">Back To DashBoard</a></h3>
+			{% endif %}
+		</main>
+	</body>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="{{url_for('static', filename ='js/bootstrap.min.js')}}"></script>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="{{url_for('static', filename ='css/bootstrap.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename ='main.css')}}">
+		<link href="{{ url_for('static', filename='layout/styles/layout.css') }}" rel="stylesheet" type="text/css" media="all">
+		{%if title%}
+			<title>MWAS - {{title}}</title>
+		{% else%}
+			<title>MWAS</title>
+		{%endif%}
+		<style>
+			body {font-family: Arial, Helvetica, sans-serif;font-color:black;}
+
+			/* The Modal (background) */
+			.modal {
+				display: none; /* Hidden by default */
+				position: fixed; /* Stay in place */
+				z-index: 1; /* Sit on top */
+				padding-top: 100px; /* Location of the box */
+				left: 0;
+				top: 0;
+				width: 100%; /* Full width */
+				height: 100%; /* Full height */
+				overflow: auto; /* Enable scroll if needed */
+				background-color: rgb(0,0,0); /* Fallback color */
+				background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+
+			/* Modal Content */
+			.modal-content {
+				position: relative;
+				background-color: #fefefe;
+				margin: auto;
+				padding: 0;
+				border: 1px solid #888;
+				width: 80%;
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+				-webkit-animation-name: animatetop;
+				-webkit-animation-duration: 0.4s;
+				animation-name: animatetop;
+				animation-duration: 0.9s
+			}
+
+			/* Add Animation */
+			@-webkit-keyframes animatetop {
+				from {top:-300px; opacity:0} 
+				to {top:0; opacity:1}
+			}
+
+			@keyframes animatetop {
+				from {top:-300px; opacity:0}
+				to {top:0; opacity:1}
+			}
+
+			/* The Close Button */
+			.close {
+				color: black;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+			}
+
+			.close:hover,
+			.close:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+			}
+
+			.modal-header {
+				padding: 2px 16px;
+				background-color: #e6ffff;
+				color: white;
+			}
+
+			.modal-body {padding: 2px 16px;}
+		</style>
+	</head>
+	<body id="top">
+		<div class="wrapper row0">
+		  <div id="topbar" class="hoc clear"> 
+			<div class="fl_left">
+			  <ul>
+				<li><i class="fa fa-phone"></i> +256 786 659 191</li>
+				<li><i class="fa fa-envelope-o"></i> info@marketsurveyassistantwebservice.com</li>
+			  </ul>
+			</div>
+			<div class="fl_right">
+			<ul class="clear">
+				<li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul>
+			</div>
+		  </div>
+		</div>
+		<br/>
+		<div class="bgded overlay" style="background-image:url({{url_for('static',filename='images/demo/backgrounds/b.jpeg')}}); opacity: 1;">
+			<div class="wrapper row1">
+				<header id="header" class="hoc clear"> 
+					<div id="logo" class="fl_left">
+						<h2><strong><font color="black">Market Survey Assistant Web Service</font></strong></h2>
+					</div>
+					<nav id="mainav" class="fl_right">
+						{% if current_user.is_authenticated %}
+						<ul>
+							<li><a href="{{ url_for('account')}}">Account</a></li>
+							<li><a href="{{ url_for('logout') }}">Logout</a></li>
+							<li><img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}"></li>
+						</ul>
+						{% else %}
+						<ul>
+							<li><a href="{{url_for('home') }}"><i class="fa fa-lg fa-home"></i></a></li>
+							<li><a class="font-weight-bold" href="{{ url_for('register_farmer') }}"><font color="black">Register</font></a></li>
+							<li><a class="font-weight-bold" href="{{ url_for('login') }}"><font color="black">Login</font></a></li>
+						</ul>
+						{% endif %}
+					</nav>
+				</header>
+			</div>
+			<div id="pageintro" class="hoc clear"> 
+				{% with messages = get_flashed_messages(with_categories=true)%}
+					{% if messages %}
+						{% for category,message in messages%}
+							<div class="alert alert-{{ category}}">
+								{{ message }}
+							</div>
+						{% endfor%}
+					{% endif %}
+				{% endwith %}
+				<div class="flexslider basicslider">
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+		</div>
+		<div class="wrapper row5" style="align:center;">
+			 <div id="copyright" class="hoc clear"> 
+				<p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Market Survey Assistant Web Service</a></p>
+			 </div>
+		 </div>
+		<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+	</body>
+	<script src="{{ url_for('static', filename='layout/scripts/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='layout/scripts/jquery.backtotop.js') }}"></script>
+	<script src="{{ url_for('static', filename='layout/scripts/jquery.mobilemenu.js') }}"></script>
+	<script src="{{ url_for('static', filename='layout/scripts/jquery.flexslider-min.js') }}"></script>
+</html>

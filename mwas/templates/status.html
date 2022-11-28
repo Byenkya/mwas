@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content%}
+	<div class="bgded overlay" style="background-image:url('../images/demo/backgrounds/a.jpg');"> 
+		<h3><font color="white">The table below shows the issues you have raised about the web service</font></h3>
+		<div style="display:block;">
+			<p>
+				Pending - The issue has not been worked upon.<br/>
+				Solving - The issue is being worked on.<br/>
+				Solved - The issue has been worked upon.<br/>
+				Closed - The issue  needs further consideration.<br/>
+			</p>
+		</div>
+		<hr/>
+		<table>
+			<tr>
+				<th>User</th>
+				<th>Compliant</th>
+				<th>Report Date</th>
+				<th>Status</th>
+			</tr>
+			{% for complaint in data%}
+				<tr>
+					<td>{{complaint.username}}</td>
+					<td>{{complaint.compliant}}</td>
+					<td>{{complaint.date_posted}}</td>
+					<td>{{complaint.status}}</td>
+				</tr>
+			{% endfor%}
+		</table>
+		{% if current_user.sign_in_as == "Farmer"%}
+			<h3><a href="{{ url_for('farm')}}">Back To DashBoard</a></h3>
+		{% else %}
+			<h3><a href="{{ url_for('customer')}}">Back To DashBoard</a></h3>
+		{% endif %}
+	</div>
+{% endblock content%}

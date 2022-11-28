@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block content%}
+	<div>
+			<h3><font color="white">Use this this Page to Post Adverts about Agricultural Products You Want</font></h3>
+			<p>Once you are done, You will receive a <font color="red"><b>Notification about available Markets for your Produce.</b></font></p>
+			<form method="post" enctype="multipart/form-data">
+				{{ form.hidden_tag() }}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb 4">Log In</legend>
+					<div class="form-group">
+						{{ form.names.label(class="form-control-label") }}
+						
+						{% if form.names.errors %}
+							{{ form.names(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.names.errors %}
+									<span>{{error}}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.names(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.email.label(class="form-control-label") }}
+						
+						{% if form.email.errors %}
+							{{ form.email(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.email.errors %}
+									<span>{{error}}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.email(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.contact.label(class="form-control-label") }}
+						
+						{% if form.contact.errors %}
+							{{ form.contact(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.contact.errors %}
+									<span>{{error}}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.contact(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.crop.label(class="form-control-label") }}
+						
+						{% if form.crop.errors %}
+							{{ form.crop(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.crop.errors %}
+									<span>{{error}}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.crop(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.description.label(class="form-control-label") }}
+						
+						{% if form.description.errors %}
+							{{ form.description(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.description.errors %}
+									<span>{{error}}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.description(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.picture.label() }}
+						{{ form.picture(class="form-control-file")}}
+						{% if form.picture.errors %}
+							<div class="invalid-feedback">
+								{% for error in form.picture.errors %}
+									<span class="text-danger">{{error}}</span><br/>
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+				</fieldset>
+				<div class="form-group">
+					{{ form.submit(class="btn btn-outline-info") }}
+				</div>
+			</form><br/><hr/>
+			{% if current_user.sign_in_as == "Farmer"%}
+				<h3><a href="{{ url_for('farm')}}">Back To DashBoard</a></h3>
+			{% else %}
+				<h3><a href="{{ url_for('customer')}}">Back To DashBoard</a></h3>
+			{% endif %}
+		</div>
+{% endblock content%}

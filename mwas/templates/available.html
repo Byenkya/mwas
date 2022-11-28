@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content%}
+	<div class="bgded overlay" style="background-image:url('../images/demo/backgrounds/a.jpg');"> 
+		<div style='overflow-y:scroll;height:500px;'>
+			<table>
+				<tr>
+					<th>Names</th>
+					<th> Email</th>
+					<th>Contact</th>
+					<th>Crop</th>
+					<th>Description</th>
+				</tr>
+				{% for advert in crop%}
+					<tr>
+						<td>{{advert.names}}</td>
+						<td>{{advert.email}}</td>
+						<td>{{advert.contact}}</td>
+						<td>{{advert.crop}}</td>
+						<td>{{advert.description}}</td>
+					</tr>
+				{% endfor%}
+			</table>
+		</div>	
+		<h3><a href="{{ url_for('farm')}}">Back To DashBoard</a></h3>
+	</div>
+{% endblock content%}

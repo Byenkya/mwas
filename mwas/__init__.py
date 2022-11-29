@@ -27,4 +27,5 @@ mail = Mail(app)
 admin = Admin(app, name="Market Survey Assistant Web Service \n DashBoard")
 from mwas import routes
 
-
+with app.app_context():
+    db.create_all()

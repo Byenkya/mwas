@@ -82,13 +82,23 @@ with open("static.txt",'r') as fhand:
             item.extend(data[0:2])
             merge = wp+item
             merge.extend(data[10:16])
-            conn.execute('INSERT INTO retailprice VALUES (?,?,?,?,?,?,?,?,?)',(count,rp[0].replace(',',""),rp[1].replace(',',""),
-                        rp[2].replace(',',""),rp[3].replace(',',""),rp[4].replace(',',""),rp[5].replace(',',""),
-                        rp[6].replace(',',""),rp[7].replace(',',"")))
-##            conn.execute('INSERT INTO wholesaleprice VALUES (?,?,?,?,?,?,?,?,?)',(count,merge[0].replace(',',""),merge[1].replace(',',""),
-##                        merge[2].replace(',',""),merge[3].replace(',',""),merge[4].replace(',',""),merge[5].replace(',',""),
-##                        merge[6].replace(',',""),merge[7].replace(',',"")))
-            count+=1
+            conn.execute(
+                'INSERT INTO retailprice VALUES (?,?,?,?,?,?,?,?,?)',
+                (count, rp[0].replace(',', ""),
+                            rp[1].replace(',', ""),
+                            rp[2].replace(',', ""),
+                            rp[3].replace(',', ""),
+                            rp[4].replace(',', ""),
+                            rp[5].replace(',', ""),
+                            rp[6].replace(',', ""),
+                            rp[7].replace(',', ""))
+            )
+
+            conn.execute('INSERT INTO wholesaleprice VALUES (?,?,?,?,?,?,?,?,?)',(count,merge[0].replace(',',""),merge[1].replace(',',""),
+                           merge[2].replace(',',""),merge[3].replace(',',""),merge[4].replace(',',""),merge[5].replace(',',""),
+                           merge[6].replace(',',""),merge[7].replace(',',"")))
+
+            count += 1
 
 conn.commit()
 conn.close()

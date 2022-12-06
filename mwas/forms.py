@@ -55,8 +55,9 @@ class LoginForm(FlaskForm):
 
 class QueryForm(FlaskForm):
     with app.app_context():
-        data = []
-        # data = Marketing_stat_wp.query.all()
+        # data = []
+        data = Marketing_stat_wp.query.all()
+        print("kkkkkkkk", data)
         choices = []
         count = 0
         if data:
